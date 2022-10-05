@@ -3,6 +3,11 @@ fileNameInput = document.querySelector('.file-name input'),
 selectMenu = document.querySelector('.save-as select'),
 saveBtn = document.querySelector('.save-btn');
 
+selectMenu.addEventListener('change', () => {
+  let selectedOption = selectMenu.options[selectMenu.selectedIndex].text;
+  saveBtn.innerText = `Save as ${selectedOption.split(" ")[0]} File`;
+});
+
 saveBtn.addEventListener('click', () => {
   const blob = new Blob([textarea.value], {type: selectMenu.value});
   //URL.createObjectURL creates a url that represent passed object
@@ -11,5 +16,4 @@ saveBtn.addEventListener('click', () => {
   link.download = fileNameInput.value; //passing filename as download
   link.href = fileUrl; // passing fileUrl as href value of link
   link.click(); // clicking link so the file download
-
 });
